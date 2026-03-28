@@ -3,7 +3,7 @@
 <head>
     <meta name="description" content="Portfolio Muhammad Fahrizal - Sistem Informasi Graduate, Web Development, UI Design, dan Technology Projects">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Muhammad Fahrizal — Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -29,6 +29,7 @@
             background: var(--paper);
             color: var(--ink);
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
         /* ── NOISE TEXTURE OVERLAY ── */
@@ -48,7 +49,7 @@
         .container {
             max-width: 1140px;
             margin: 0 auto;
-            padding: 0 32px;
+            padding: 0 24px; /* Dikurangi dari 32px */
         }
 
         /* ── SCROLLBAR ── */
@@ -71,10 +72,10 @@
             align-items: center;
             height: 68px;
             border-bottom: 1px solid var(--border);
-            background: rgba(245,242,236,0.88);
+            background: rgba(245,242,236,0.95); /* opacity lebih tinggi untuk mobile */
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            padding: 0 40px;
+            padding: 0 24px; /* Dikurangi dari 40px */
         }
 
         .logo {
@@ -128,22 +129,20 @@
             overflow: hidden;
         }
 
-        /* ── HERO BACKGROUND PHOTO ── */
-#home::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: url("bghome.png");
-    background-size: cover;
-    background-position: center top;
-    background-repeat: no-repeat;
-    opacity: 0.85;
-    filter: grayscale(20%);
-    z-index: 0;
-    pointer-events: none;
-}
+        #home::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: url("bghome.png");
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+            opacity: 0.85;
+            filter: grayscale(20%);
+            z-index: 0;
+            pointer-events: none;
+        }
 
-        /* Gradient overlay di atas foto agar teks tetap terbaca */
         .hero-photo-overlay {
             position: absolute;
             inset: 0;
@@ -157,7 +156,6 @@
             pointer-events: none;
         }
 
-        /* Pastikan semua konten hero berada di atas background */
         #home .container { position: relative; z-index: 2; }
         #home .hero-scroll { z-index: 2; }
 
@@ -167,7 +165,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             font-family: 'Syne', sans-serif;
-            font-size: clamp(80px, 15vw, 220px);
+            font-size: clamp(60px, 12vw, 180px); /* Dikurangi ukuran untuk mobile */
             font-weight: 800;
             color: transparent;
             -webkit-text-stroke: 1px rgba(13,13,13,0.06);
@@ -212,12 +210,13 @@
         .hero-headline {
             font-family: 'Syne', sans-serif;
             font-weight: 800;
-            font-size: clamp(2.4rem, 6vw, 5.5rem);
+            font-size: clamp(2rem, 8vw, 4.5rem); /* Diperbaiki clamp untuk mobile */
             line-height: 1.0;
             letter-spacing: -0.04em;
             position: relative;
             z-index: 1;
             animation: fadeUp 0.9s 0.1s ease both;
+            margin-bottom: 20px;
         }
 
         .hero-headline em {
@@ -243,6 +242,7 @@
             font-size: 1rem;
             line-height: 1.7;
             font-weight: 300;
+            flex: 1;
         }
 
         .hero-cta {
@@ -250,20 +250,26 @@
             gap: 16px;
             align-items: center;
             flex-shrink: 0;
+            flex-wrap: wrap;
         }
 
-        .btn-primary {
+        .btn-primary, .btn-outline {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background: var(--ink);
-            color: var(--paper);
             padding: 14px 28px;
             border-radius: 4px;
             font-size: 0.9rem;
             font-weight: 500;
             transition: all 0.3s;
             letter-spacing: 0.01em;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: var(--ink);
+            color: var(--paper);
         }
 
         .btn-primary:hover {
@@ -272,17 +278,10 @@
             box-shadow: 0 8px 24px rgba(200,80,26,0.3);
         }
 
-            .btn-outline {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
+        .btn-outline {
             border: 1.5px solid var(--ink);
             color: var(--ink);
-            padding: 13px 28px;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.3s;
+            background: transparent;
         }
 
         .btn-outline:hover {
@@ -345,7 +344,7 @@
 
         .section-title {
             font-family: 'Syne', sans-serif;
-            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-size: clamp(1.8rem, 4vw, 3.2rem);
             font-weight: 700;
             letter-spacing: -0.03em;
             line-height: 1.1;
@@ -575,7 +574,7 @@
             left: -32px;
             right: -32px;
             top: 0;
-            bottom: 0;
+                       bottom: 0;
             background: var(--card-bg);
             border-radius: 12px;
             opacity: 0;
@@ -654,59 +653,52 @@
         .project-link:hover { gap: 10px; }
         .project-link i { font-size: 0.7rem; }
 
-       /* ──────────── CERTIFICATES ──────────── */
-#certificates {
-    background: var(--paper);
-}
+        /* ──────────── CERTIFICATES ──────────── */
+        #certificates {
+            background: var(--paper);
+        }
 
-.certificate-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-}
+        .certificate-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
 
-.certificate-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
+        .certificate-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
 
-.certificate-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 48px rgba(0,0,0,0.08);
-}
+        .certificate-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 48px rgba(0,0,0,0.08);
+        }
 
-.certificate-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
+        .certificate-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
 
-.certificate-body {
-    padding: 20px;
-}
+        .certificate-body {
+            padding: 20px;
+        }
 
-.certificate-body h3 {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.1rem;
-    margin-bottom: 8px;
-}
+        .certificate-body h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
 
-.certificate-body p {
-    font-size: 0.85rem;
-    color: var(--muted);
-    line-height: 1.6;
-}
+        .certificate-body p {
+            font-size: 0.85rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
 
-/* Responsive */
-@media (max-width: 900px) {
-    .certificate-grid {
-        grid-template-columns: 1fr;
-    }
-}
-       
         /* ──────────── CONTACT ──────────── */
         #contact {
             background: var(--ink);
@@ -752,6 +744,7 @@
             font-weight: 500;
             transition: all 0.3s;
             margin-bottom: 48px;
+            text-decoration: none;
         }
 
         .contact-email:hover {
@@ -791,7 +784,7 @@
             background: #0a0a0a;
             color: rgba(255,255,255,0.25);
             text-align: center;
-            padding: 24px 32px;
+            padding: 24px 24px;
             font-size: 0.8rem;
             letter-spacing: 0.04em;
         }
@@ -820,44 +813,186 @@
             transform: translateY(0);
         }
 
-        /* ──────────── RESPONSIVE ──────────── */
-        @media (max-width: 900px) {
-
-            .about-grid {
+        /* ──────────── RESPONSIVE BREAKPOINTS ──────────── */
+        
+        /* Tablet */
+        @media (max-width: 1024px) {
+            .container { padding: 0 20px; }
+            nav { padding: 0 20px; }
+            .about-grid, .skills-wrapper {
                 grid-template-columns: 1fr;
                 gap: 48px;
             }
+        }
 
-            .skills-wrapper {
-                grid-template-columns: 1fr;
-            }
-
+        /* Mobile Large */
+        @media (max-width: 900px) {
+            .container { padding: 0 16px; }
+            nav { padding: 0 16px; }
+            
             .hero-bottom {
                 flex-direction: column;
                 align-items: flex-start;
+                gap: 32px;
             }
-
-            nav {
-                padding: 0 20px;
+            
+            .hero-cta {
+                flex-direction: column;
+                width: 100%;
+                gap: 12px;
             }
-
-            .container {
-                padding: 0 20px;
+            
+            .btn-primary, .btn-outline {
+                justify-content: center;
+                width: 100%;
+                max-width: 280px;
             }
-
+            
+            .certificate-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
         }
 
-        @media (max-width: 680px) {
-            nav { padding: 0 20px; }
-            .nav-links { display: none; }
-            .container { padding: 0 20px; }
-            .hero-headline { font-size: 2.4rem; }
-            .hero-bottom { flex-direction: column; align-items: flex-start; gap: 24px; }
+        /* Mobile Medium */
+        @media (max-width: 768px) {
+            nav { 
+                padding: 0 16px; 
+                height: 60px;
+            }
+            
+            .hero-headline {
+                font-size: clamp(2rem, 10vw, 3.5rem);
+                line-height: 1.1;
+            }
+            
+            .hero-desc {
+                font-size: 0.95rem;
+                max-width: 100%;
+            }
+            
+            section { padding: 80px 0; }
+            
+            .about-stats {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .stat-box .num {
+                font-size: 2rem;
+            }
+            
+            .project-item {
+                grid-template-columns: 60px 1fr;
+                gap: 24px;
+                padding: 32px 0;
+            }
+            
+            .project-links {
+                display: none;
+            }
+            
+            .certificate-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+        }
+
+        /* Mobile Small */
+        @media (max-width: 480px) {
+            .container { padding: 0 12px; }
+            nav { padding: 0 12px; }
+            
             .hero-scroll { display: none; }
-            .about-stats { grid-template-columns: 1fr 1fr; }
-            .project-item { grid-template-columns: 48px 1fr; gap: 16px; }
-            .project-links { display: none; }
-            .project-item::before { left: -16px; right: -16px; }
+            .hero-bg-text { 
+                font-size: clamp(40px, 12vw, 120px);
+            }
+            
+            .hero-headline {
+                font-size: clamp(1.8rem, 9vw, 3rem);
+            }
+            
+            .hero-desc {
+                font-size: 0.9rem;
+            }
+            
+            .project-item {
+                grid-template-columns: 48px 1fr;
+                gap: 16px;
+                padding: 24px 0;
+            }
+            
+            .project-num {
+                font-size: 0.75rem;
+            }
+            
+            .project-body h3 {
+                font-size: 1.2rem;
+            }
+            
+            .project-body p {
+                font-size: 0.85rem;
+            }
+            
+            .skill-block {
+                padding: 24px 20px;
+            }
+            
+            .skill-tags {
+                gap: 6px;
+            }
+            
+            .skill-tag {
+                font-size: 0.75rem;
+                padding: 6px 12px;
+            }
+            
+            section { padding: 60px 0; }
+            .section-title {
+                font-size: clamp(1.5rem, 6vw, 2.5rem);
+                margin-bottom: 40px;
+            }
+            
+            .edu-card {
+                padding: 20px 24px;
+            }
+            
+            .contact-email {
+                padding: 14px 24px;
+                font-size: 0.95rem;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            
+            .social-row {
+                gap: 12px;
+            }
+            
+            .social-btn {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Extra Small Screens */
+        @media (max-width: 360px) {
+            .container { padding: 0 8px; }
+            nav { padding: 0 8px; }
+            .logo { font-size: 1.1rem; }
+            
+            .hero-headline {
+                font-size: clamp(1.6rem, 8vw, 2.8rem);
+            }
+            
+            .btn-primary, .btn-outline {
+                padding: 12px 20px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Hide desktop nav on mobile */
+        @media (max-width: 680px) {
+            .nav-links { display: none; }
         }
     </style>
 </head>
@@ -880,7 +1015,6 @@
 
     <!-- ── HERO ── -->
     <section id="home">
-        <!-- Overlay gradient di atas foto background -->
         <div class="hero-photo-overlay"></div>
         <div class="hero-bg-text">FAHRIZAL</div>
         <div class="container">
@@ -910,9 +1044,9 @@
     <section id="about">
         <div class="container">
             <span class="section-label reveal">Tentang Saya</span>
+            <h2 class="section-title reveal">Saya membangun sistem<br>yang <em style="font-style:normal;color:var(--accent)">bekerja</em> & terlihat baik.</h2>
             <div class="about-grid">
                 <div class="about-text reveal">
-                    <h2 class="section-title">Saya membangun sistem<br>yang <em style="font-style:normal;color:var(--accent)">bekerja</em> & terlihat baik.</h2>
                     <p>
                         Fresh Graduate Sistem Informasi dengan keahlian utama dalam <strong>analisis sistem</strong>, 
                         pemodelan proses bisnis, dan <strong>desain UI/UX</strong>. Memiliki pengalaman dalam 
@@ -922,7 +1056,7 @@
                         Kemampuan tambahan di bidang <strong>fotografi, videografi, dan digital content</strong> 
                         memperkuat komunikasi visual dalam penyampaian solusi teknologi yang efektif.
                     </p>
-                    <div class="edu-card">
+                    <div class="edu-card reveal">
                         <div class="uni"><i class="fas fa-university" style="margin-right:8px"></i>Universitas Dian Nuswantoro</div>
                         <h4 style="margin-top:8px">S-1 Sistem Informasi</h4>
                         <div class="meta">Lulus: 2026 &nbsp;·&nbsp; IPK: 3.54 / 4.00</div>
@@ -992,8 +1126,7 @@
                         <span class="skill-tag">Illustrator</span>
                         <span class="skill-tag">Premiere Pro</span>
                         <span class="skill-tag">Canva</span>
-                        <span class="skill-tag">CapCut</span>
-                        <span class="skill-tag">Microsoft Office</span>
+                        <span class="skill-tag">CapCut                        <span class="skill-tag">Microsoft Office</span>
                     </div>
                 </div>
 
@@ -1106,58 +1239,58 @@
     </section>
 
     <!-- ── CERTIFICATES ── -->
-<section id="certificates">
-    <div class="container">
-        <span class="section-label reveal">Sertifikat</span>
-        <h2 class="section-title reveal">Pelatihan & Sertifikasi</h2>
+    <section id="certificates">
+        <div class="container">
+            <span class="section-label reveal">Sertifikat</span>
+            <h2 class="section-title reveal">Pelatihan & Sertifikasi</h2>
 
-        <div class="certificate-grid reveal">
+            <div class="certificate-grid reveal">
 
-            <!-- Sertifikat 1 -->
-            <div class="certificate-card">
-                <img src="sertifikat1.jpg" alt="Sertifikat 1">
-                <div class="certificate-body">
-                    <h3>Machine Learning - IBM</h3>
-                    <p>Pelatihan Machine Learning mencakup supervised learning dan model evaluasi.</p>
+                <!-- Sertifikat 1 -->
+                <div class="certificate-card">
+                    <img src="sertifikat1.jpg" alt="Sertifikat 1">
+                    <div class="certificate-body">
+                        <h3>Machine Learning - IBM</h3>
+                        <p>Pelatihan Machine Learning mencakup supervised learning dan model evaluasi.</p>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Sertifikat 2 -->
-            <div class="certificate-card">
-                <img src="sertifikat2.jpg" alt="Sertifikat 2">
-                <div class="certificate-body">
-                    <h3>UX Design - Google</h3>
-                    <p>Belajar dasar desain UI/UX, user research, wireframing, dan prototyping.</p>
+                <!-- Sertifikat 2 -->
+                <div class="certificate-card">
+                    <img src="sertifikat2.jpg" alt="Sertifikat 2">
+                    <div class="certificate-body">
+                        <h3>UX Design - Google</h3>
+                        <p>Belajar dasar desain UI/UX, user research, wireframing, dan prototyping.</p>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Sertifikat 3 -->
-            <div class="certificate-card">
-                <img src="sertifikat3.jpg" alt="Sertifikat 3">
-                <div class="certificate-body">
-                    <h3>Python Flask - Coursera</h3>
-                    <p>Pembuatan web app sederhana menggunakan Python dan framework Flask.</p>
+                <!-- Sertifikat 3 -->
+                <div class="certificate-card">
+                    <img src="sertifikat3.jpg" alt="Sertifikat 3">
+                    <div class="certificate-body">
+                        <h3>Python Flask - Coursera</h3>
+                        <p>Pembuatan web app sederhana menggunakan Python dan framework Flask.</p>
+                    </div>
                 </div>
-            </div>
 
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- ── CONTACT ── -->
-            <section id="contact">
-                <div class="container">
-                    <span class="section-label">Kontak</span>
-                    <h2 class="contact-headline">
-            Siap berkontribusi.<br>
-            <em>Mari berkolaborasi.</em>
-        </h2>
+    <section id="contact">
+        <div class="container">
+            <span class="section-label">Kontak</span>
+            <h2 class="contact-headline">
+                Siap berkontribusi.<br>
+                <em>Mari berkolaborasi.</em>
+            </h2>
             <p class="contact-sub">
                 Sebagai fresh graduate Sistem Informasi, saya sedang mencari kesempatan kerja untuk memulai karier profesional di bidang teknologi dan pengembangan sistem.
             </p>
-             <a href="/cdn-cgi/l/email-protection#fc9a9d948e95869d90c9c9cec9ccbc9b919d9590d29f9391" class="contact-email">
+            <a href="mailto:fahrizal55250@gmail.com" class="contact-email">
                 <i class="fas fa-envelope"></i>
-                <span class="__cf_email__" data-cfemail="d6b0b7bea4bfacb7bae3e3e4e3e696b1bbb7bfbaf8b5b9bb">fahrizal55250@gmail.com</span>
+                fahrizal55250@gmail.com
             </a>
             <div class="social-row">
                 <a href="https://linkedin.com/in/muhammadfahrizal290504" target="_blank" class="social-btn">
@@ -1178,7 +1311,7 @@
         <p>&copy; 2026 <span>Muhammad Fahrizal</span>. Dibuat dengan HTML, CSS & sedikit kreativitas.</p>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         // Scroll reveal
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -1207,9 +1340,15 @@
                 if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
             });
             navLinks.forEach(a => {
-                a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--ink)' : '';
+                a.parentElement.classList.remove('active');
+                if (a.getAttribute('href') === `#${current}`) {
+                    a.parentElement.classList.add('active');
+                }
             });
         });
+
+        // Prevent zoom on input focus for better mobile UX
+        document.addEventListener('touchstart', function() {}, true);
     </script>
 
 </body>
