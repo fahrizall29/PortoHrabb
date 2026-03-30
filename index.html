@@ -5,10 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Muhammad Fahrizal — Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
+        /* ═══════════════════════════════════════════
+           CSS CUSTOM PROPERTIES
+        ═══════════════════════════════════════════ */
         :root {
             --ink: #0d0d0d;
             --paper: #f5f2ec;
@@ -18,9 +21,36 @@
             --muted: #7a756d;
             --card-bg: #ffffff;
             --border: rgba(13,13,13,0.1);
+
+            /* Spacing scale */
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 40px;
+            --space-xl: 64px;
+            --space-2xl: 100px;
+
+            /* Container */
+            --container-max: 1140px;
+            --container-pad: clamp(16px, 4vw, 48px);
+
+            /* Nav */
+            --nav-h: 68px;
+
+            /* Typography */
+            --hero-fs: clamp(2.2rem, 9vw, 5rem);
+            --h2-fs: clamp(1.8rem, 4vw, 3.2rem);
+            --body-fs: clamp(0.9rem, 2.2vw, 1.05rem);
         }
 
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        /* ═══════════════════════════════════════════
+           RESET & BASE
+        ═══════════════════════════════════════════ */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         html { scroll-behavior: smooth; }
 
@@ -30,9 +60,10 @@
             color: var(--ink);
             overflow-x: hidden;
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* ── NOISE TEXTURE OVERLAY ── */
+        /* Noise texture overlay */
         body::before {
             content: '';
             position: fixed;
@@ -40,67 +71,78 @@
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
             pointer-events: none;
             z-index: 9999;
-            opacity: 1;
         }
 
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
+        img { max-width: 100%; display: block; }
 
-        .container {
-            max-width: 1140px;
-            margin: 0 auto;
-            padding: 0 24px; /* Dikurangi dari 32px */
-        }
-
-        /* ── SCROLLBAR ── */
-        ::-webkit-scrollbar { width: 5px; }
+        /* ═══════════════════════════════════════════
+           SCROLLBAR
+        ═══════════════════════════════════════════ */
+        ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: var(--paper); }
         ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 99px; }
 
-        /* ──────────── NAVBAR ──────────── */
+        /* ═══════════════════════════════════════════
+           CONTAINER
+        ═══════════════════════════════════════════ */
+        .container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 var(--container-pad);
+            width: 100%;
+        }
+
+        /* ═══════════════════════════════════════════
+           NAVBAR
+        ═══════════════════════════════════════════ */
         header {
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            padding: 0;
         }
 
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 68px;
+            height: var(--nav-h);
             border-bottom: 1px solid var(--border);
-            background: rgba(245,242,236,0.95); /* opacity lebih tinggi untuk mobile */
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            padding: 0 24px; /* Dikurangi dari 40px */
+            background: rgba(245,242,236,0.96);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 0 var(--container-pad);
+            max-width: 100%;
         }
 
         .logo {
             font-family: 'Syne', sans-serif;
             font-weight: 800;
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 3vw, 1.2rem);
             letter-spacing: -0.03em;
+            flex-shrink: 0;
         }
 
         .logo span { color: var(--accent); }
 
+        /* Desktop nav links */
         .nav-links {
             display: flex;
-            gap: 36px;
+            gap: clamp(16px, 3vw, 36px);
             align-items: center;
         }
 
         .nav-links a {
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             font-weight: 500;
             letter-spacing: 0.04em;
             text-transform: uppercase;
             color: var(--muted);
             transition: color 0.25s;
             position: relative;
+            white-space: nowrap;
         }
 
         .nav-links a::after {
@@ -117,14 +159,85 @@
         .nav-links a:hover { color: var(--ink); }
         .nav-links a:hover::after { width: 100%; }
 
-        /* ──────────── HERO ──────────── */
+        /* Hamburger button */
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+            border: none;
+            background: none;
+            z-index: 1001;
+        }
+
+        .nav-hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--ink);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+
+        .nav-hamburger.active span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        .nav-hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+        .nav-hamburger.active span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* Mobile menu drawer */
+        .nav-mobile {
+            display: none;
+            position: fixed;
+            top: var(--nav-h);
+            left: 0;
+            right: 0;
+            background: rgba(245,242,236,0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 24px var(--container-pad);
+            z-index: 999;
+            transform: translateY(-110%);
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-mobile.open {
+            transform: translateY(0);
+        }
+
+        .nav-mobile a {
+            display: block;
+            padding: 14px 0;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--muted);
+            border-bottom: 1px solid var(--border);
+            transition: color 0.2s;
+        }
+
+        .nav-mobile a:last-child { border-bottom: none; }
+        .nav-mobile a:hover { color: var(--accent); }
+
+        /* ═══════════════════════════════════════════
+           HERO
+        ═══════════════════════════════════════════ */
         #home {
-            min-height: 100vh;
+            min-height: 100svh;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            padding-bottom: 80px;
-            padding-top: 68px;
+            padding-bottom: clamp(48px, 8vw, 80px);
+            padding-top: var(--nav-h);
             position: relative;
             overflow: hidden;
         }
@@ -140,7 +253,6 @@
             opacity: 0.85;
             filter: grayscale(20%);
             z-index: 0;
-            pointer-events: none;
         }
 
         .hero-photo-overlay {
@@ -149,15 +261,14 @@
             background: linear-gradient(
                 to bottom,
                 rgba(245,242,236,0.0) 0%,
-                rgba(245,242,236,0.3) 55%,
-                rgba(245,242,236,0.82) 100%
+                rgba(245,242,236,0.25) 50%,
+                rgba(245,242,236,0.85) 100%
             );
             z-index: 1;
             pointer-events: none;
         }
 
         #home .container { position: relative; z-index: 2; }
-        #home .hero-scroll { z-index: 2; }
 
         .hero-bg-text {
             position: absolute;
@@ -165,7 +276,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             font-family: 'Syne', sans-serif;
-            font-size: clamp(60px, 12vw, 180px); /* Dikurangi ukuran untuk mobile */
+            font-size: clamp(48px, 14vw, 200px);
             font-weight: 800;
             color: transparent;
             -webkit-text-stroke: 1px rgba(13,13,13,0.06);
@@ -182,13 +293,13 @@
             gap: 8px;
             background: var(--accent);
             color: white;
-            font-size: 0.75rem;
+            font-size: clamp(0.65rem, 1.5vw, 0.75rem);
             font-weight: 500;
             letter-spacing: 0.08em;
             text-transform: uppercase;
             padding: 6px 14px;
             border-radius: 99px;
-            margin-bottom: 28px;
+            margin-bottom: 24px;
             width: fit-content;
             animation: fadeUp 0.8s ease both;
         }
@@ -199,6 +310,7 @@
             height: 6px;
             border-radius: 50%;
             background: white;
+            flex-shrink: 0;
             animation: pulse 1.5s infinite;
         }
 
@@ -210,13 +322,13 @@
         .hero-headline {
             font-family: 'Syne', sans-serif;
             font-weight: 800;
-            font-size: clamp(2rem, 8vw, 4.5rem); /* Diperbaiki clamp untuk mobile */
+            font-size: var(--hero-fs);
             line-height: 1.0;
             letter-spacing: -0.04em;
             position: relative;
             z-index: 1;
             animation: fadeUp 0.9s 0.1s ease both;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .hero-headline em {
@@ -228,42 +340,40 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            margin-top: 48px;
+            margin-top: clamp(24px, 5vw, 48px);
             position: relative;
             z-index: 1;
             animation: fadeUp 1s 0.2s ease both;
-            gap: 40px;
-            flex-wrap: wrap;
+            gap: clamp(24px, 4vw, 40px);
         }
 
         .hero-desc {
-            max-width: 420px;
+            max-width: 440px;
             color: white;
-            font-size: 1rem;
-            line-height: 1.7;
+            font-size: clamp(0.875rem, 2vw, 1rem);
+            line-height: 1.75;
             font-weight: 300;
             flex: 1;
         }
 
         .hero-cta {
             display: flex;
-            gap: 16px;
+            gap: 12px;
             align-items: center;
             flex-shrink: 0;
-            flex-wrap: wrap;
         }
 
         .btn-primary, .btn-outline {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
-            padding: 14px 28px;
+            padding: clamp(12px, 2vw, 14px) clamp(20px, 3vw, 28px);
             border-radius: 4px;
-            font-size: 0.9rem;
+            font-size: clamp(0.82rem, 1.8vw, 0.9rem);
             font-weight: 500;
             transition: all 0.3s;
             letter-spacing: 0.01em;
-            text-decoration: none;
             white-space: nowrap;
         }
 
@@ -290,19 +400,21 @@
             transform: translateY(-2px);
         }
 
+        /* Scroll indicator */
         .hero-scroll {
             position: absolute;
             bottom: 40px;
-            right: 40px;
+            right: clamp(24px, 4vw, 48px);
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 8px;
             color: var(--muted);
-            font-size: 0.7rem;
+            font-size: 0.68rem;
             letter-spacing: 0.12em;
             text-transform: uppercase;
             animation: fadeIn 1.5s 0.5s ease both;
+            z-index: 2;
         }
 
         .hero-scroll-line {
@@ -319,19 +431,21 @@
             100% { transform: scaleY(0); transform-origin: bottom; }
         }
 
-        /* ──────────── SECTION COMMON ──────────── */
-        section { padding: 100px 0; }
+        /* ═══════════════════════════════════════════
+           SECTION COMMON
+        ═══════════════════════════════════════════ */
+        section { padding: clamp(60px, 8vw, 100px) 0; }
 
         .section-label {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 500;
             letter-spacing: 0.12em;
             text-transform: uppercase;
             color: var(--accent);
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
         .section-label::before {
@@ -340,37 +454,33 @@
             width: 24px;
             height: 1.5px;
             background: var(--accent);
+            flex-shrink: 0;
         }
 
         .section-title {
             font-family: 'Syne', sans-serif;
-            font-size: clamp(1.8rem, 4vw, 3.2rem);
+            font-size: var(--h2-fs);
             font-weight: 700;
             letter-spacing: -0.03em;
             line-height: 1.1;
-            margin-bottom: 56px;
+            margin-bottom: clamp(32px, 6vw, 56px);
         }
 
-        .section-divider {
-            width: 100%;
-            height: 1px;
-            background: var(--border);
-            margin-bottom: 80px;
-        }
-
-        /* ──────────── ABOUT ──────────── */
+        /* ═══════════════════════════════════════════
+           ABOUT
+        ═══════════════════════════════════════════ */
         #about { background: var(--cream); }
 
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 80px;
+            gap: clamp(40px, 6vw, 80px);
             align-items: start;
         }
 
         .about-text p {
             color: var(--muted);
-            font-size: 1.05rem;
+            font-size: var(--body-fs);
             line-height: 1.85;
             font-weight: 300;
             margin-bottom: 20px;
@@ -382,7 +492,7 @@
             background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 28px 32px;
+            padding: clamp(20px, 3vw, 28px) clamp(20px, 3vw, 32px);
             margin-top: 32px;
             position: relative;
             overflow: hidden;
@@ -391,9 +501,7 @@
         .edu-card::before {
             content: '';
             position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
+            left: 0; top: 0; bottom: 0;
             width: 4px;
             background: var(--accent);
             border-radius: 4px 0 0 4px;
@@ -409,18 +517,18 @@
         .edu-card .uni {
             color: var(--accent);
             font-weight: 500;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
         }
 
         .edu-card .meta {
             color: var(--muted);
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             margin: 8px 0 12px;
         }
 
         .edu-card .thesis {
             color: var(--muted);
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             line-height: 1.6;
             font-style: italic;
             border-top: 1px solid var(--border);
@@ -438,7 +546,7 @@
             background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 28px 24px;
+            padding: clamp(20px, 3vw, 28px) clamp(16px, 2.5vw, 24px);
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
@@ -449,7 +557,7 @@
 
         .stat-box .num {
             font-family: 'Syne', sans-serif;
-            font-size: 2.4rem;
+            font-size: clamp(1.8rem, 4vw, 2.4rem);
             font-weight: 800;
             letter-spacing: -0.04em;
             color: var(--accent);
@@ -457,7 +565,7 @@
         }
 
         .stat-box .label {
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             color: var(--muted);
             margin-top: 8px;
             line-height: 1.4;
@@ -473,20 +581,22 @@
         .stat-box-wide .num { color: var(--accent); }
         .stat-box-wide .label { color: rgba(245,242,236,0.6); }
 
-        /* ──────────── SKILLS ──────────── */
+        /* ═══════════════════════════════════════════
+           SKILLS
+        ═══════════════════════════════════════════ */
         #skills { background: var(--paper); }
 
         .skills-wrapper {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 32px;
+            gap: clamp(16px, 3vw, 32px);
         }
 
         .skill-block {
             background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 16px;
-            padding: 36px;
+            padding: clamp(24px, 4vw, 36px);
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
@@ -499,7 +609,7 @@
             display: flex;
             align-items: center;
             gap: 14px;
-            margin-bottom: 28px;
+            margin-bottom: 24px;
         }
 
         .skill-block-icon {
@@ -517,7 +627,7 @@
 
         .skill-block-title {
             font-family: 'Syne', sans-serif;
-            font-size: 1.1rem;
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
             font-weight: 700;
         }
 
@@ -530,9 +640,9 @@
         .skill-tag {
             background: var(--cream);
             border: 1px solid transparent;
-            padding: 8px 16px;
+            padding: 7px 14px;
             border-radius: 99px;
-            font-size: 0.82rem;
+            font-size: clamp(0.72rem, 1.5vw, 0.82rem);
             font-weight: 400;
             color: var(--ink);
             transition: all 0.25s;
@@ -546,21 +656,22 @@
             box-shadow: 0 6px 16px rgba(200,80,26,0.25);
         }
 
-        /* ──────────── PROJECTS ──────────── */
+        /* ═══════════════════════════════════════════
+           PROJECTS
+        ═══════════════════════════════════════════ */
         #projects { background: var(--cream); }
 
         .projects-list {
             display: flex;
             flex-direction: column;
-            gap: 0;
         }
 
         .project-item {
             display: grid;
-            grid-template-columns: 80px 1fr auto;
-            gap: 32px;
+            grid-template-columns: 72px 1fr auto;
+            gap: clamp(16px, 3vw, 32px);
             align-items: start;
-            padding: 40px 0;
+            padding: clamp(28px, 5vw, 40px) 0;
             border-bottom: 1px solid var(--border);
             transition: all 0.3s;
             position: relative;
@@ -571,10 +682,8 @@
         .project-item::before {
             content: '';
             position: absolute;
-            left: -32px;
-            right: -32px;
-            top: 0;
-                       bottom: 0;
+            left: -20px; right: -20px;
+            top: 0; bottom: 0;
             background: var(--card-bg);
             border-radius: 12px;
             opacity: 0;
@@ -587,7 +696,7 @@
 
         .project-num {
             font-family: 'Syne', sans-serif;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             font-weight: 700;
             color: var(--muted);
             letter-spacing: 0.08em;
@@ -596,10 +705,10 @@
 
         .project-body h3 {
             font-family: 'Syne', sans-serif;
-            font-size: 1.4rem;
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
             font-weight: 700;
             letter-spacing: -0.02em;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             transition: color 0.25s;
         }
 
@@ -607,9 +716,9 @@
 
         .project-body p {
             color: var(--muted);
-            font-size: 0.9rem;
+            font-size: clamp(0.85rem, 1.8vw, 0.9rem);
             line-height: 1.7;
-            max-width: 580px;
+            max-width: 560px;
             font-weight: 300;
         }
 
@@ -617,14 +726,14 @@
             display: flex;
             flex-wrap: wrap;
             gap: 6px;
-            margin-top: 16px;
+            margin-top: 14px;
         }
 
         .ptag {
             background: var(--cream);
             padding: 4px 12px;
             border-radius: 99px;
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             letter-spacing: 0.04em;
             font-weight: 500;
             text-transform: uppercase;
@@ -643,25 +752,26 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             font-weight: 500;
             color: var(--accent);
             letter-spacing: 0.02em;
             transition: gap 0.2s;
+            white-space: nowrap;
         }
 
         .project-link:hover { gap: 10px; }
-        .project-link i { font-size: 0.7rem; }
+        .project-link i { font-size: 0.68rem; }
 
-        /* ──────────── CERTIFICATES ──────────── */
-        #certificates {
-            background: var(--paper);
-        }
+        /* ═══════════════════════════════════════════
+           CERTIFICATES
+        ═══════════════════════════════════════════ */
+        #certificates { background: var(--paper); }
 
         .certificate-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
+            gap: clamp(16px, 2.5vw, 24px);
         }
 
         .certificate-card {
@@ -679,27 +789,44 @@
 
         .certificate-card img {
             width: 100%;
-            height: 200px;
+            height: 180px;
             object-fit: cover;
+            background: var(--cream);
+        }
+
+        /* Placeholder for missing images */
+        .certificate-card .img-placeholder {
+            width: 100%;
+            height: 180px;
+            background: var(--cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--muted);
+            font-size: 2rem;
         }
 
         .certificate-body {
-            padding: 20px;
+            padding: clamp(16px, 2.5vw, 20px);
         }
 
         .certificate-body h3 {
             font-family: 'Syne', sans-serif;
-            font-size: 1.1rem;
+            font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+            font-weight: 700;
             margin-bottom: 8px;
+            line-height: 1.3;
         }
 
         .certificate-body p {
-            font-size: 0.85rem;
+            font-size: clamp(0.78rem, 1.5vw, 0.85rem);
             color: var(--muted);
             line-height: 1.6;
         }
 
-        /* ──────────── CONTACT ──────────── */
+        /* ═══════════════════════════════════════════
+           CONTACT
+        ═══════════════════════════════════════════ */
         #contact {
             background: var(--ink);
             color: var(--paper);
@@ -711,7 +838,7 @@
 
         .contact-headline {
             font-family: 'Syne', sans-serif;
-            font-size: clamp(2rem, 5vw, 4rem);
+            font-size: clamp(2rem, 6vw, 4rem);
             font-weight: 800;
             letter-spacing: -0.04em;
             line-height: 1.05;
@@ -725,26 +852,27 @@
 
         .contact-sub {
             color: rgba(245,242,236,0.5);
-            font-size: 1rem;
+            font-size: clamp(0.875rem, 2vw, 1rem);
             font-weight: 300;
             max-width: 440px;
             margin: 0 auto 48px;
-            line-height: 1.7;
+            line-height: 1.75;
         }
 
         .contact-email {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 12px;
             background: var(--accent);
             color: white;
-            padding: 16px 36px;
+            padding: clamp(13px, 2.5vw, 16px) clamp(24px, 4vw, 36px);
             border-radius: 4px;
-            font-size: 1rem;
+            font-size: clamp(0.875rem, 2vw, 1rem);
             font-weight: 500;
             transition: all 0.3s;
             margin-bottom: 48px;
-            text-decoration: none;
+            flex-wrap: wrap;
         }
 
         .contact-email:hover {
@@ -756,7 +884,7 @@
         .social-row {
             display: flex;
             justify-content: center;
-            gap: 16px;
+            gap: clamp(10px, 2vw, 16px);
             flex-wrap: wrap;
         }
 
@@ -779,19 +907,23 @@
             background: rgba(200,80,26,0.1);
         }
 
-        /* ──────────── FOOTER ──────────── */
+        /* ═══════════════════════════════════════════
+           FOOTER
+        ═══════════════════════════════════════════ */
         footer {
             background: #0a0a0a;
             color: rgba(255,255,255,0.25);
             text-align: center;
-            padding: 24px 24px;
-            font-size: 0.8rem;
+            padding: 24px var(--container-pad);
+            font-size: 0.78rem;
             letter-spacing: 0.04em;
         }
 
         footer span { color: var(--accent); }
 
-        /* ──────────── ANIMATIONS ──────────── */
+        /* ═══════════════════════════════════════════
+           ANIMATIONS
+        ═══════════════════════════════════════════ */
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -813,195 +945,367 @@
             transform: translateY(0);
         }
 
-        /* ──────────── RESPONSIVE BREAKPOINTS ──────────── */
-        
-        /* Tablet */
+        /* ═══════════════════════════════════════════
+           ─────────────────────────────────────────
+           RESPONSIVE MEDIA QUERIES
+           Breakpoints:
+           • 1200px  — Large Desktop
+           • 1024px  — Tablet Landscape
+           • 900px   — Tablet Portrait
+           • 768px   — Large Mobile / Small Tablet
+           • 600px   — Mobile Landscape
+           • 480px   — Mobile Portrait
+           • 360px   — Small Mobile
+        ═══════════════════════════════════════════ */
+
+        /* ── 1200px: Large Desktop ── */
+        @media (max-width: 1200px) {
+            :root {
+                --container-pad: clamp(16px, 3vw, 40px);
+            }
+        }
+
+        /* ── 1024px: Tablet Landscape ── */
         @media (max-width: 1024px) {
-            .container { padding: 0 20px; }
-            nav { padding: 0 20px; }
-            .about-grid, .skills-wrapper {
+            :root {
+                --nav-h: 64px;
+            }
+
+            .about-grid {
                 grid-template-columns: 1fr;
                 gap: 48px;
             }
+
+            .about-stats {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .stat-box-wide {
+                grid-column: 1 / -1;
+            }
+
+            .skills-wrapper {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+
+            .certificate-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 18px;
+            }
+
+            .project-item {
+                grid-template-columns: 64px 1fr auto;
+            }
         }
 
-        /* Mobile Large */
+        /* ── 900px: Tablet Portrait ── */
         @media (max-width: 900px) {
-            .container { padding: 0 16px; }
-            nav { padding: 0 16px; }
-            
+            :root {
+                --nav-h: 60px;
+            }
+
+            /* Hide desktop nav, show hamburger */
+            .nav-links { display: none; }
+            .nav-hamburger { display: flex; }
+            .nav-mobile { display: block; }
+
             .hero-bottom {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 32px;
+                gap: 28px;
             }
-            
+
+            .hero-desc { max-width: 100%; }
+
             .hero-cta {
-                flex-direction: column;
-                width: 100%;
+                flex-direction: row;
                 gap: 12px;
+                flex-wrap: wrap;
             }
-            
-            .btn-primary, .btn-outline {
-                justify-content: center;
-                width: 100%;
-                max-width: 280px;
+
+            .about-stats {
+                grid-template-columns: repeat(2, 1fr);
             }
-            
+
+            .skills-wrapper {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
             .certificate-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+
+            .project-item {
+                grid-template-columns: 56px 1fr;
                 gap: 20px;
             }
-        }
 
-        /* Mobile Medium */
-        @media (max-width: 768px) {
-            nav { 
-                padding: 0 16px; 
-                height: 60px;
-            }
-            
-            .hero-headline {
-                font-size: clamp(2rem, 10vw, 3.5rem);
-                line-height: 1.1;
-            }
-            
-            .hero-desc {
-                font-size: 0.95rem;
-                max-width: 100%;
-            }
-            
-            section { padding: 80px 0; }
-            
-            .about-stats {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .stat-box .num {
-                font-size: 2rem;
-            }
-            
-            .project-item {
-                grid-template-columns: 60px 1fr;
-                gap: 24px;
-                padding: 32px 0;
-            }
-            
-            .project-links {
-                display: none;
-            }
-            
-            .certificate-grid {
-                grid-template-columns: 1fr;
-                gap: 16px;
-            }
-        }
+            .project-links { display: none; }
 
-        /* Mobile Small */
-        @media (max-width: 480px) {
-            .container { padding: 0 12px; }
-            nav { padding: 0 12px; }
-            
-            .hero-scroll { display: none; }
-            .hero-bg-text { 
-                font-size: clamp(40px, 12vw, 120px);
-            }
-            
-            .hero-headline {
-                font-size: clamp(1.8rem, 9vw, 3rem);
-            }
-            
-            .hero-desc {
-                font-size: 0.9rem;
-            }
-            
-            .project-item {
-                grid-template-columns: 48px 1fr;
-                gap: 16px;
-                padding: 24px 0;
-            }
-            
-            .project-num {
-                font-size: 0.75rem;
-            }
-            
-            .project-body h3 {
-                font-size: 1.2rem;
-            }
-            
-            .project-body p {
-                font-size: 0.85rem;
-            }
-            
-            .skill-block {
-                padding: 24px 20px;
-            }
-            
-            .skill-tags {
-                gap: 6px;
-            }
-            
-            .skill-tag {
-                font-size: 0.75rem;
-                padding: 6px 12px;
-            }
-            
-            section { padding: 60px 0; }
-            .section-title {
-                font-size: clamp(1.5rem, 6vw, 2.5rem);
-                margin-bottom: 40px;
-            }
-            
-            .edu-card {
-                padding: 20px 24px;
-            }
-            
-            .contact-email {
-                padding: 14px 24px;
-                font-size: 0.95rem;
+            /* Show links inline on mobile */
+            .project-mobile-links {
+                display: flex !important;
                 flex-wrap: wrap;
-                gap: 8px;
+                gap: 12px;
+                margin-top: 14px;
             }
-            
-            .social-row {
+        }
+
+        /* ── 768px: Large Mobile ── */
+        @media (max-width: 768px) {
+            :root {
+                --nav-h: 58px;
+            }
+
+            .hero-bg-text {
+                font-size: clamp(40px, 13vw, 100px);
+            }
+
+            .hero-cta {
+                width: 100%;
+            }
+
+            .btn-primary, .btn-outline {
+                flex: 1;
+                min-width: 130px;
+            }
+
+            .about-stats {
+                grid-template-columns: repeat(2, 1fr);
                 gap: 12px;
             }
-            
+
+            .certificate-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 14px;
+            }
+
+            .certificate-card img,
+            .certificate-card .img-placeholder {
+                height: 150px;
+            }
+
+            .contact-headline {
+                font-size: clamp(1.8rem, 7vw, 3rem);
+            }
+
+            .social-row { gap: 10px; }
+
             .social-btn {
-                padding: 8px 16px;
+                padding: 9px 16px;
+                font-size: 0.78rem;
+            }
+        }
+
+        /* ── 600px: Mobile Landscape / Smaller Tablet ── */
+        @media (max-width: 600px) {
+            .hero-scroll { display: none; }
+
+            .hero-tag { font-size: 0.65rem; padding: 5px 12px; }
+
+            .hero-bottom { gap: 20px; }
+
+            .project-item {
+                grid-template-columns: 44px 1fr;
+                gap: 14px;
+            }
+
+            .project-num { font-size: 0.75rem; }
+
+            .certificate-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+
+            .certificate-body { padding: 14px; }
+        }
+
+        /* ── 480px: Mobile Portrait ── */
+        @media (max-width: 480px) {
+            :root {
+                --nav-h: 56px;
+                --container-pad: 16px;
+            }
+
+            section { padding: 52px 0; }
+
+            .logo { font-size: 1rem; }
+
+            .hero-bg-text { font-size: clamp(36px, 12vw, 80px); }
+
+            .hero-cta { flex-direction: column; }
+            .btn-primary, .btn-outline { width: 100%; max-width: 320px; }
+
+            .about-stats {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .stat-box-wide { padding: 20px 18px; }
+
+            .skill-block { padding: 20px 18px; }
+            .skill-tag { font-size: 0.72rem; padding: 6px 12px; }
+            .skill-tags { gap: 6px; }
+
+            .project-item {
+                grid-template-columns: 40px 1fr;
+                gap: 12px;
+                padding: 22px 0;
+            }
+
+            .project-num { font-size: 0.72rem; }
+            .project-body h3 { font-size: 1.1rem; }
+            .project-body p { font-size: 0.83rem; }
+
+            .ptag { font-size: 0.65rem; padding: 3px 10px; }
+
+            .certificate-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .certificate-card img,
+            .certificate-card .img-placeholder {
+                height: 200px;
+            }
+
+            .certificate-body h3 { font-size: 0.95rem; }
+
+            .contact-email {
+                word-break: break-word;
+                text-align: center;
+            }
+
+            .edu-card { padding: 18px 20px; }
+            .edu-card h4 { font-size: 0.95rem; }
+
+            .section-label { font-size: 0.68rem; }
+            .section-title { margin-bottom: 28px; }
+        }
+
+        /* ── 360px: Small/Compact Mobile ── */
+        @media (max-width: 360px) {
+            :root {
+                --container-pad: 12px;
+                --nav-h: 52px;
+            }
+
+            .logo { font-size: 0.95rem; }
+
+            section { padding: 44px 0; }
+
+            .hero-tag { font-size: 0.6rem; padding: 5px 10px; }
+
+            .hero-bg-text { display: none; }
+
+            .btn-primary, .btn-outline {
+                padding: 11px 18px;
                 font-size: 0.8rem;
             }
+
+            .about-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-box-wide .num { font-size: 1.4rem; }
+            .stat-box-wide .label { font-size: 0.75rem; }
+
+            .skill-block-title { font-size: 0.9rem; }
+
+            .project-item {
+                grid-template-columns: 36px 1fr;
+                gap: 10px;
+            }
+
+            .contact-sub { font-size: 0.83rem; }
+            .contact-email { font-size: 0.82rem; }
         }
 
-        /* Extra Small Screens */
-        @media (max-width: 360px) {
-            .container { padding: 0 8px; }
-            nav { padding: 0 8px; }
-            .logo { font-size: 1.1rem; }
-            
-            .hero-headline {
-                font-size: clamp(1.6rem, 8vw, 2.8rem);
+        /* ── Landscape orientation on short screens ── */
+        @media (max-height: 500px) and (orientation: landscape) {
+            #home {
+                min-height: auto;
+                padding-top: calc(var(--nav-h) + 20px);
+                padding-bottom: 40px;
             }
-            
-            .btn-primary, .btn-outline {
-                padding: 12px 20px;
-                font-size: 0.85rem;
+
+            .hero-scroll { display: none; }
+        }
+
+        /* ── High-DPI / Retina screens ── */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .hero-bg-text {
+                -webkit-text-stroke-width: 0.5px;
             }
         }
 
-        /* Hide desktop nav on mobile */
-        @media (max-width: 680px) {
-            .nav-links { display: none; }
+        /* ── Prefers reduced motion ── */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
         }
+
+        /* ── Touch device optimizations ── */
+        @media (hover: none) and (pointer: coarse) {
+            .skill-tag:hover,
+            .btn-primary:hover,
+            .btn-outline:hover,
+            .stat-box:hover,
+            .skill-block:hover,
+            .certificate-card:hover {
+                transform: none;
+                box-shadow: none;
+            }
+        }
+
+        /* ─────────────────────────────────────────
+           Project mobile links (hidden on desktop)
+        ───────────────────────────────────────── */
+        .project-mobile-links {
+            display: none;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .project-mobile-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--accent);
+            border: 1px solid rgba(200,80,26,0.3);
+            padding: 5px 12px;
+            border-radius: 99px;
+            transition: all 0.25s;
+        }
+
+        .project-mobile-link:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR -->
+    <!-- ══ NAVBAR ══ -->
     <header>
         <nav>
             <div class="logo">MF<span>.</span></div>
+
+            <!-- Desktop nav -->
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">Tentang</a></li>
@@ -1010,10 +1314,27 @@
                 <li><a href="#certificates">Sertifikat</a></li>
                 <li><a href="#contact">Kontak</a></li>
             </ul>
+
+            <!-- Hamburger button (mobile) -->
+            <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </nav>
+
+        <!-- Mobile drawer -->
+        <div class="nav-mobile" id="mobileMenu" role="navigation">
+            <a href="#home" class="mobile-nav-link">Home</a>
+            <a href="#about" class="mobile-nav-link">Tentang</a>
+            <a href="#skills" class="mobile-nav-link">Keahlian</a>
+            <a href="#projects" class="mobile-nav-link">Proyek</a>
+            <a href="#certificates" class="mobile-nav-link">Sertifikat</a>
+            <a href="#contact" class="mobile-nav-link">Kontak</a>
+        </div>
     </header>
 
-    <!-- ── HERO ── -->
+    <!-- ══ HERO ══ -->
     <section id="home">
         <div class="hero-photo-overlay"></div>
         <div class="hero-bg-text">FAHRIZAL</div>
@@ -1040,20 +1361,21 @@
         </div>
     </section>
 
-    <!-- ── ABOUT ── -->
+    <!-- ══ ABOUT ══ -->
     <section id="about">
         <div class="container">
             <span class="section-label reveal">Tentang Saya</span>
-            <h2 class="section-title reveal">Saya membangun sistem<br>yang <em style="font-style:normal;color:var(--accent)">bekerja</em> & terlihat baik.</h2>
+            <h2 class="section-title reveal">Saya membangun sistem<br>yang <em style="font-style:normal;color:var(--accent)">bekerja</em> &amp; terlihat baik.</h2>
+
             <div class="about-grid">
                 <div class="about-text reveal">
                     <p>
-                        Fresh Graduate Sistem Informasi dengan keahlian utama dalam <strong>analisis sistem</strong>, 
-                        pemodelan proses bisnis, dan <strong>desain UI/UX</strong>. Memiliki pengalaman dalam 
+                        Fresh Graduate Sistem Informasi dengan keahlian utama dalam <strong>analisis sistem</strong>,
+                        pemodelan proses bisnis, dan <strong>desain UI/UX</strong>. Memiliki pengalaman dalam
                         pengembangan aplikasi berbasis web dan Business Process Reengineering (BPR).
                     </p>
                     <p>
-                        Kemampuan tambahan di bidang <strong>fotografi, videografi, dan digital content</strong> 
+                        Kemampuan tambahan di bidang <strong>fotografi, videografi, dan digital content</strong>
                         memperkuat komunikasi visual dalam penyampaian solusi teknologi yang efektif.
                     </p>
                     <div class="edu-card reveal">
@@ -1074,11 +1396,11 @@
                     </div>
                     <div class="stat-box">
                         <div class="num">3+</div>
-                        <div class="label">Proyek & Pengalaman Nyata</div>
+                        <div class="label">Proyek &amp; Pengalaman Nyata</div>
                     </div>
                     <div class="stat-box">
                         <div class="num">10+</div>
-                        <div class="label">Tools & Teknologi Dikuasai</div>
+                        <div class="label">Tools &amp; Teknologi Dikuasai</div>
                     </div>
                     <div class="stat-box">
                         <div class="num">2</div>
@@ -1086,21 +1408,20 @@
                     </div>
                     <div class="stat-box stat-box-wide">
                         <div class="num">SI & Creative</div>
-                        <div class="label">Sistem Informasi · UI/UX Design · Digital Content · Fotografi & Videografi</div>
+                        <div class="label">Sistem Informasi · UI/UX Design · Digital Content · Fotografi &amp; Videografi</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ── SKILLS ── -->
+    <!-- ══ SKILLS ══ -->
     <section id="skills">
         <div class="container">
             <span class="section-label reveal">Keahlian</span>
             <h2 class="section-title reveal">Stack &amp; Keterampilan</h2>
 
             <div class="skills-wrapper reveal">
-                <!-- Hard Skills -->
                 <div class="skill-block">
                     <div class="skill-block-header">
                         <div class="skill-block-icon"><i class="fas fa-laptop-code"></i></div>
@@ -1113,24 +1434,24 @@
                         <span class="skill-tag">Use Case Diagram</span>
                         <span class="skill-tag">Activity Diagram</span>
                         <span class="skill-tag">Pengembangan Web</span>
-                        <span class="skill-tag">HTML & CSS</span>
+                        <span class="skill-tag">HTML &amp; CSS</span>
                         <span class="skill-tag">Python</span>
                         <span class="skill-tag">C++</span>
                         <span class="skill-tag">MySQL</span>
                         <span class="skill-tag">Desain UI/UX</span>
                         <span class="skill-tag">Figma</span>
-                        <span class="skill-tag">Wireframe & Mockup</span>
-                        <span class="skill-tag">Fotografi & Videografi</span>
+                        <span class="skill-tag">Wireframe &amp; Mockup</span>
+                        <span class="skill-tag">Fotografi &amp; Videografi</span>
                         <span class="skill-tag">Adobe Photoshop</span>
                         <span class="skill-tag">Lightroom</span>
                         <span class="skill-tag">Illustrator</span>
                         <span class="skill-tag">Premiere Pro</span>
                         <span class="skill-tag">Canva</span>
-                        <span class="skill-tag">CapCut                        <span class="skill-tag">Microsoft Office</span>
+                        <span class="skill-tag">CapCut</span>
+                        <span class="skill-tag">Microsoft Office</span>
                     </div>
                 </div>
 
-                <!-- Soft Skills -->
                 <div class="skill-block">
                     <div class="skill-block-header">
                         <div class="skill-block-icon"><i class="fas fa-users"></i></div>
@@ -1151,22 +1472,21 @@
         </div>
     </section>
 
-    <!-- ── PROJECTS ── -->
+    <!-- ══ PROJECTS ══ -->
     <section id="projects">
         <div class="container">
-            <span class="section-label reveal">Proyek & Pengalaman</span>
+            <span class="section-label reveal">Proyek &amp; Pengalaman</span>
             <h2 class="section-title reveal">Karya yang Pernah<br>Saya Kerjakan</h2>
 
             <div class="projects-list">
 
-                <!-- Project 1 -->
                 <div class="project-item reveal">
                     <div class="project-num">01</div>
                     <div class="project-body">
                         <h3>Sistem Akademik Universitas</h3>
                         <p>
-                            Sistem Informasi Akademik berbasis web yang mengelola data mahasiswa, dosen, mata kuliah, KRS, 
-                            serta pengolahan nilai secara terintegrasi dalam satu sistem terpusat. Dilengkapi login berbasis 
+                            Sistem Informasi Akademik berbasis web yang mengelola data mahasiswa, dosen, mata kuliah, KRS,
+                            serta pengolahan nilai secara terintegrasi dalam satu sistem terpusat. Dilengkapi login berbasis
                             peran (admin, dosen, mahasiswa) dan fitur CRUD lengkap.
                         </p>
                         <div class="project-tags-small">
@@ -1174,6 +1494,14 @@
                             <span class="ptag">MySQL</span>
                             <span class="ptag">CRUD</span>
                             <span class="ptag">Role-Based Access</span>
+                        </div>
+                        <div class="project-mobile-links">
+                            <a href="https://github.com/fahrizall29" class="project-mobile-link" target="_blank">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                            <a href="https://dinus.ac.id/" class="project-mobile-link" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> Demo
+                            </a>
                         </div>
                     </div>
                     <div class="project-links">
@@ -1186,14 +1514,13 @@
                     </div>
                 </div>
 
-                <!-- Project 2 -->
                 <div class="project-item reveal">
                     <div class="project-num">02</div>
                     <div class="project-body">
                         <h3>Magang — Dinas Ketenagakerjaan Kab. Batang</h3>
                         <p>
-                            Program magang di bagian IT, dengan tugas mendukung pengelolaan sistem informasi internal, 
-                            pemeliharaan perangkat keras dan lunak, serta troubleshooting teknis pada sistem dan jaringan 
+                            Program magang di bagian IT, dengan tugas mendukung pengelolaan sistem informasi internal,
+                            pemeliharaan perangkat keras dan lunak, serta troubleshooting teknis pada sistem dan jaringan
                             di lingkungan pemerintahan.
                         </p>
                         <div class="project-tags-small">
@@ -1201,6 +1528,11 @@
                             <span class="ptag">Manajemen Data</span>
                             <span class="ptag">Pemerintahan</span>
                             <span class="ptag">Networking</span>
+                        </div>
+                        <div class="project-mobile-links">
+                            <a href="https://drive.google.com/drive/folders/1yBv5OqRzaTbFv1PW_puMU-CEaGBIo6Ua" class="project-mobile-link" target="_blank">
+                                <i class="fas fa-briefcase"></i> Lihat Detail
+                            </a>
                         </div>
                     </div>
                     <div class="project-links">
@@ -1210,14 +1542,13 @@
                     </div>
                 </div>
 
-                <!-- Project 3 -->
                 <div class="project-item reveal">
                     <div class="project-num">03</div>
                     <div class="project-body">
                         <h3>Organisasi OSIS — Seksi TIK</h3>
                         <p>
-                            Aktif sebagai anggota Seksi Teknologi Informasi dan Komunikasi OSIS. Mengelola dokumentasi digital, 
-                            desain media publikasi, konten media sosial, serta memastikan kebutuhan teknis presentasi 
+                            Aktif sebagai anggota Seksi Teknologi Informasi dan Komunikasi OSIS. Mengelola dokumentasi digital,
+                            desain media publikasi, konten media sosial, serta memastikan kebutuhan teknis presentasi
                             dan sistem dokumentasi kegiatan sekolah berjalan lancar.
                         </p>
                         <div class="project-tags-small">
@@ -1225,6 +1556,11 @@
                             <span class="ptag">Content Creation</span>
                             <span class="ptag">Media Sosial</span>
                             <span class="ptag">Dokumentasi</span>
+                        </div>
+                        <div class="project-mobile-links">
+                            <a href="https://www.instagram.com/osis.smantang/" class="project-mobile-link" target="_blank">
+                                <i class="fab fa-instagram"></i> Lihat Profil
+                            </a>
                         </div>
                     </div>
                     <div class="project-links">
@@ -1238,61 +1574,70 @@
         </div>
     </section>
 
-    <!-- ── CERTIFICATES ── -->
+    <!-- ══ CERTIFICATES ══ -->
     <section id="certificates">
         <div class="container">
             <span class="section-label reveal">Sertifikat</span>
-            <h2 class="section-title reveal">Pelatihan & Sertifikasi</h2>
+            <h2 class="section-title reveal">Pelatihan &amp; Sertifikasi</h2>
 
             <div class="certificate-grid reveal">
 
-                <!-- Sertifikat 1 -->
                 <div class="certificate-card">
-                    <img src="sertifikat1.jpg" alt="Sertifikat 1">
+                    <img src="sertifikat1.jpg" alt="Sertifikat Machine Learning IBM"
+                         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="img-placeholder" style="display:none"><i class="fas fa-certificate"></i></div>
                     <div class="certificate-body">
-                        <h3>Machine Learning - IBM</h3>
+                        <h3>Machine Learning — IBM</h3>
                         <p>Pelatihan Machine Learning mencakup supervised learning dan model evaluasi.</p>
                     </div>
                 </div>
 
-                <!-- Sertifikat 2 -->
                 <div class="certificate-card">
-                    <img src="sertifikat2.jpg" alt="Sertifikat 2">
+                    <img src="sertifikat2.jpg" alt="Sertifikat UX Design Google"
+                         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="img-placeholder" style="display:none"><i class="fas fa-certificate"></i></div>
                     <div class="certificate-body">
-                        <h3>UX Design - Google</h3>
+                        <h3>UX Design — Google</h3>
                         <p>Belajar dasar desain UI/UX, user research, wireframing, dan prototyping.</p>
                     </div>
                 </div>
 
-                <!-- Sertifikat 3 -->
                 <div class="certificate-card">
-                    <img src="sertifikat3.jpg" alt="Sertifikat 3">
+                    <img src="sertifikat3.jpg" alt="Sertifikat Python Flask"
+                         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="img-placeholder" style="display:none"><i class="fas fa-certificate"></i></div>
                     <div class="certificate-body">
-                        <h3>Python Flask - Coursera</h3>
+                        <h3>Python Flask — Coursera</h3>
                         <p>Pembuatan web app sederhana menggunakan Python dan framework Flask.</p>
                     </div>
                 </div>
 
-                 <div class="certificate-card">
-                    <img src="sertifikat4.jpg" alt="Sertifikat 3">
+                <div class="certificate-card">
+                    <img src="sertifikat4.jpg" alt="Sertifikat Data Analyst IBM"
+                         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="img-placeholder" style="display:none"><i class="fas fa-certificate"></i></div>
                     <div class="certificate-body">
-                        <h3>Data Analyst - IBM</h3>
+                        <h3>Data Analyst — IBM</h3>
                         <p>Mempelajari teknik eksplorasi dan analisis data untuk memahami pola, hubungan, dan insight sebagai dasar pengembangan model machine learning.</p>
                     </div>
                 </div>
 
-                 <div class="certificate-card">
-                    <img src="sertifikat5.jpg" alt="Sertifikat Regression">
+                <div class="certificate-card">
+                    <img src="sertifikat5.jpg" alt="Sertifikat Regression Coursera"
+                         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="img-placeholder" style="display:none"><i class="fas fa-certificate"></i></div>
                     <div class="certificate-body">
-                        <h3>Supervised Machine Learning: Regression - Coursera</h3>
+                        <h3>Supervised ML: Regression — Coursera</h3>
                         <p>Mempelajari konsep dan penerapan algoritma regresi dalam supervised learning untuk memprediksi nilai berdasarkan data historis.</p>
                     </div>
                 </div>
 
-               <div class="certificate-card">
-                    <img src="sertifikat6.jpg" alt="Sertifikat AI Literacy">
+                <div class="certificate-card">
+                    <img src="sertifikat6.jpg" alt="Sertifikat AI Literacy"
+                         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="img-placeholder" style="display:none"><i class="fas fa-certificate"></i></div>
                     <div class="certificate-body">
-                        <h3>AI Literacy for Everyone - Bass Training Center</h3>
+                        <h3>AI Literacy for Everyone — Bass Training</h3>
                         <p>Mempelajari dasar-dasar kecerdasan buatan, termasuk konsep, penerapan, dan pemanfaatannya dalam berbagai bidang kehidupan.</p>
                     </div>
                 </div>
@@ -1301,7 +1646,7 @@
         </div>
     </section>
 
-    <!-- ── CONTACT ── -->
+    <!-- ══ CONTACT ══ -->
     <section id="contact">
         <div class="container">
             <span class="section-label">Kontak</span>
@@ -1330,49 +1675,90 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- ══ FOOTER ══ -->
     <footer>
-        <p>&copy; 2026 <span>Muhammad Fahrizal</span>. Dibuat dengan HTML, CSS & sedikit kreativitas.</p>
+        <p>&copy; 2026 <span>Muhammad Fahrizal</span>. Dibuat dengan HTML, CSS &amp; sedikit kreativitas.</p>
     </footer>
 
     <script>
-        // Scroll reveal
-        const observer = new IntersectionObserver((entries) => {
+        /* ──────────── HAMBURGER MENU ──────────── */
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+        function toggleMenu(open) {
+            hamburger.classList.toggle('active', open);
+            mobileMenu.classList.toggle('open', open);
+            hamburger.setAttribute('aria-expanded', open);
+            document.body.style.overflow = open ? 'hidden' : '';
+        }
+
+        hamburger.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.contains('open');
+            toggleMenu(!isOpen);
+        });
+
+        // Close menu when a link is clicked
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => toggleMenu(false));
+        });
+
+        // Close menu on outside click
+        document.addEventListener('click', (e) => {
+            if (mobileMenu.classList.contains('open') &&
+                !mobileMenu.contains(e.target) &&
+                !hamburger.contains(e.target)) {
+                toggleMenu(false);
+            }
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') toggleMenu(false);
+        });
+
+        /* ──────────── SCROLL REVEAL ──────────── */
+        const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    // stagger children if multiple reveals in same parent
+                    // Stagger delay based on sibling index
                     const siblings = entry.target.parentElement?.querySelectorAll('.reveal');
                     siblings?.forEach((el, i) => {
                         if (el === entry.target) {
                             el.style.transitionDelay = `${i * 0.08}s`;
                         }
                     });
+                    entry.target.classList.add('visible');
                 }
             });
-        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
 
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-        // Active nav highlight on scroll
+        /* ──────────── ACTIVE NAV ON SCROLL ──────────── */
         const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-links a');
+        const desktopLinks = document.querySelectorAll('.nav-links a');
 
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(sec => {
-                if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
-            });
-            navLinks.forEach(a => {
-                a.parentElement.classList.remove('active');
-                if (a.getAttribute('href') === `#${current}`) {
-                    a.parentElement.classList.add('active');
+        const navObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    desktopLinks.forEach(a => {
+                        const isActive = a.getAttribute('href') === `#${id}`;
+                        a.style.color = isActive ? 'var(--accent)' : '';
+                    });
                 }
             });
-        });
+        }, { threshold: 0.4 });
 
-        // Prevent zoom on input focus for better mobile UX
-        document.addEventListener('touchstart', function() {}, true);
+        sections.forEach(sec => navObserver.observe(sec));
+
+        /* ──────────── RESIZE: CLOSE MOBILE MENU ──────────── */
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 900) {
+                toggleMenu(false);
+            }
+        });
     </script>
 
 </body>
